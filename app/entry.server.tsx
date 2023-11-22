@@ -1,4 +1,5 @@
 import type { EntryContext } from "@remix-run/node";
+import type { i18n as i18nType } from "i18next";
 
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
@@ -6,7 +7,7 @@ import { renderToPipeableStream } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";
 import isbot from "isbot";
-import { createInstance, i18n as I18N } from 'i18next';
+import { createInstance } from 'i18next';
 import { PassThrough } from "node:stream";
 import { resolve } from "node:path";
 
@@ -25,7 +26,7 @@ export default async function handleRequest(
     ? "onAllReady"
     : "onShellReady";
 
-  let i18nInstance = createInstance();
+  let i18nInstance = createInstance() as i18nType;
   let lng = await i18next.getLocale(request);
   let ns = i18next.getRouteNamespaces(remixContext);
 
@@ -43,7 +44,7 @@ export default async function handleRequest(
     let didError = false;
 
     let { pipe, abort } = renderToPipeableStream(
-      <I18nextProvider i18n={i18nInstance as I18N}>
+      <I18nextProvider i18n={i18nInstance}>
         <RemixServer context={remixContext} url={request.url} />
       </I18nextProvider>,
       {
