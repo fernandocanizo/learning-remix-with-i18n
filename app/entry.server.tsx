@@ -1,14 +1,17 @@
-import { PassThrough } from "stream";
 import type { EntryContext } from "@remix-run/node";
+
+import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { createInstance } from "i18next";
-import i18next from "~/services/i18next.server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";
-import i18nextConfig from "~/i18nextConfig"; // your i18n configuration file
+import isbot from "isbot";
+import { createInstance } from "i18next";
+import { PassThrough } from "node:stream";
 import { resolve } from "node:path";
+
+import i18next from "~/services/i18next.server";
+import i18nextConfig from "~/i18nextConfig"; // your i18n configuration file
 
 const ABORT_DELAY = 5000;
 
@@ -45,12 +48,13 @@ export default async function handleRequest(
       </I18nextProvider>,
       {
         [callbackName]: () => {
-          let body = new PassThrough();
+          const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(body, {
+            new Response(stream, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
             })
