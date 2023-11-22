@@ -2,8 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useChangeLanguage } from "remix-i18next";
 import { useTranslation } from "react-i18next";
-
-import i18next from "~/services/i18next.server.js";
+import i18next from "~/services/i18next.server";
 
 import {
   useLoaderData,

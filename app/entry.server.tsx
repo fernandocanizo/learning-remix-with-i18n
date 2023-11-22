@@ -10,8 +10,8 @@ import { createInstance, i18n as I18N } from 'i18next';
 import { PassThrough } from "node:stream";
 import { resolve } from "node:path";
 
-import i18next from "~/services/i18next.server.js";
-import i18nextConfig from "~/i18nextConfig.js"; // your i18n configuration file
+import i18next from "~/services/i18next.server";
+import i18nextConfig from "~/i18nextConfig"; // your i18n configuration file
 
 const ABORT_DELAY = 5000;
 
