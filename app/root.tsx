@@ -20,7 +20,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({ locale });
 }
 
-export let handle = {
+export const handle = {
   // In the handle export, we can add a i18n key with namespaces our route
   // will need to load. This key can be a single string or an array of strings.
   // TIP: In most cases, you should set this to your defaultNS from your i18n config
@@ -32,7 +32,7 @@ export default function Root() {
   // Get the locale from the loader
   let { locale } = useLoaderData<typeof loader>();
 
-  let { i18n } = useTranslation();
+  let { i18n, t } = useTranslation();
 
   // This hook will change the i18n instance language to the current locale
   // detected by the loader, this way, when we do something to change the
@@ -47,6 +47,27 @@ export default function Root() {
         <Links />
       </head>
       <body>
+        <h1>Test localization</h1>
+        <ul>
+          <li>
+            <strong>chooseLanguage:</strong><span>&nbsp;{t('login.chooseLanguage')}</span>
+          </li>
+          <li>
+            <strong>nameOrEmail:</strong><span>&nbsp;{t('login.nameOrEmail')}</span>
+          </li>
+          <li>
+            <strong>password:</strong><span>&nbsp;{t('login.password')}</span>
+          </li>
+          <li>
+            <strong>login:</strong><span>&nbsp;{t('login.login')}</span>
+          </li>
+          <li>
+            <strong>some.deep.translation:</strong><span>&nbsp;{t('some.deep.translation')}</span>
+          </li>
+        </ul>
+
+        <hr />
+        <p>What's below comes from index route</p>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
