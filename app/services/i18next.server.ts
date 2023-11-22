@@ -1,7 +1,8 @@
 import Backend from "i18next-fs-backend";
 import { resolve } from "node:path";
 import { RemixI18Next } from "remix-i18next";
-import i18nextConfig from "~/i18nextConfig"; // your i18n configuration file
+
+import i18nextConfig from "~/i18nextConfig.js"; // your i18n configuration file
 
 let i18next = new RemixI18Next({
   detection: {
