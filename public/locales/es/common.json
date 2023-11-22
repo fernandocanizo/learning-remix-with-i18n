@@ -1,0 +1,14 @@
+{
+  "login": {
+    "chooseLanguage": "Elija idioma",
+    "nameOrEmail": "Nombre o email",
+    "password": "Contraseña",
+    "login": "Iniciar sesión"
+  },
+  "some": {
+    "deep": {
+      "translation": "Una traducción profunda"
+    }
+  }
+}
+

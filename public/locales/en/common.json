@@ -1,0 +1,13 @@
+{
+  "login": {
+    "chooseLanguage": "Choose Language",
+    "nameOrEmail": "Name or Email",
+    "password": "Password",
+    "login": "Sign in"
+  },
+  "some": {
+    "deep": {
+      "translation": "Some deep translation"
+    }
+  }
+}
